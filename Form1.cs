@@ -12,7 +12,9 @@ namespace MCOT_prj
 {
     public partial class Form1 : Form
     {
+        ElementEditor elEditor = new ElementEditor();
         DataBase db = new DataBase();
+        Subjects sub = new Subjects();
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +23,8 @@ namespace MCOT_prj
         private void Form1_Load(object sender, EventArgs e)
         {
             db.con.Open();
+            db.findGroups();
+            SetGroups();
 
         }
 
@@ -28,5 +32,29 @@ namespace MCOT_prj
         {
             db.con.Close();
         }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            //elEditor.SetGroups(comboBox1, sub.Groups);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SetGroups()
+        {
+            foreach (string s in db.groups)
+            {
+                comboBox1.Items.Add(s);
+            }
+        }
+
     }
 }
