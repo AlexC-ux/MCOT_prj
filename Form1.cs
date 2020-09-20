@@ -67,7 +67,6 @@ namespace MCOT_prj
             List<string> subjects = new List<string>();
             foreach (string s in db.GetSubj("Понедельник"))
             {
-                MessageBox.Show(s);
                 subjects.Add(s);
             }
         }

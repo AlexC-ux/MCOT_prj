@@ -44,14 +44,31 @@ namespace MCOT_prj
         {
 
             List<string> subjects = new List<string>();
-            query = "SELECT even FROM MainTable WHERE MainTable.group='"+activeGroup+"' AND MainTable.dayoftheweek ='"+day+"'";
-            MessageBox.Show(query);
+            query = "SELECT 'even' FROM MainTable WHERE MainTable.group='"+activeGroup+"' AND MainTable.dayoftheweek ='"+day+"'";
             OleDbCommand command = new OleDbCommand(query, con);
             OleDbDataReader reader = command.ExecuteReader();
-
             while (reader.Read())
             {
                 subjects.Add(reader.GetString(0));
+            }
+            reader.Close();
+            if (subjects.Count<2)
+            {
+                subjects.Clear();
+                query= "SELECT l1 FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l1 = new OleDbCommand(query, con);
+                reader = command_l1.ExecuteReader();
+                while (reader.Read())
+                {
+                    subjects.Add(reader[0].ToString());
+                }
+
+
+                reader.Close();
+            }
+            else
+            {
+                subjects.Clear();
             }
 
             return subjects;
