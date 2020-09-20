@@ -27,6 +27,7 @@ namespace MCOT_prj
             db.findGroups();
             SetGroups();
 
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -36,11 +37,16 @@ namespace MCOT_prj
 
         private void Form1_Activated(object sender, EventArgs e)
         {
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             choosedGroup = comboBox1.SelectedItem.ToString();
+            db.activeGroup = choosedGroup;
+            MessageBox.Show(db.activeGroup);
+            SetMondaySubjects();
+
         }
 
         private void comboBox1_MouseEnter(object sender, EventArgs e)
@@ -53,6 +59,16 @@ namespace MCOT_prj
             foreach (string s in db.groups)
             {
                 comboBox1.Items.Add(s);
+            }
+        }
+
+        private void SetMondaySubjects()
+        {
+            List<string> subjects = new List<string>();
+            foreach (string s in db.GetSubj("Понедельник"))
+            {
+                MessageBox.Show(s);
+                subjects.Add(s);
             }
         }
 
