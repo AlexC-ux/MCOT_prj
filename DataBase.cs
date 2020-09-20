@@ -395,5 +395,178 @@ namespace MCOT_prj
             return teachers;
         }
 
+        public List<string> GetClassroom(string day)
+        {
+
+            List<string> classRooms = new List<string>();
+            query = "SELECT 'even' FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+            OleDbCommand command = new OleDbCommand(query, con);
+            OleDbDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                classRooms.Add(reader.GetString(0));
+            }
+            reader.Close();
+            if (classRooms.Count < 2)
+            {
+
+                //Получение t1_num
+                classRooms.Clear();
+                query = "SELECT l1_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l1_num = new OleDbCommand(query, con);
+                reader = command_l1_num.ExecuteReader();
+                while (reader.Read())
+                {
+                    classRooms.Add(reader[0].ToString());
+                }
+
+                //Получение l2_num
+                query = "SELECT l2_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l2_num = new OleDbCommand(query, con);
+                reader = command_l2_num.ExecuteReader();
+                while (reader.Read())
+                {
+                    classRooms.Add(reader[0].ToString());
+                }
+
+                //Получение l3_num
+                query = "SELECT l3_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l3_num = new OleDbCommand(query, con);
+                reader = command_l3_num.ExecuteReader();
+                while (reader.Read())
+                {
+                    classRooms.Add(reader[0].ToString());
+                }
+
+                //Получение l4_num
+                query = "SELECT l4_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l4_num = new OleDbCommand(query, con);
+                reader = command_l4_num.ExecuteReader();
+                while (reader.Read())
+                {
+                    classRooms.Add(reader[0].ToString());
+                }
+
+                //Получение l5_num
+                query = "SELECT l5_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l5_num = new OleDbCommand(query, con);
+                reader = command_l5_num.ExecuteReader();
+                while (reader.Read())
+                {
+                    classRooms.Add(reader[0].ToString());
+                }
+
+
+
+                reader.Close();
+            }
+            else
+            {
+
+                int even = CalculateTheWeek(ChoosedDay);
+
+
+                if (even == 0)
+                {
+                    //Получение l1_num
+                    classRooms.Clear();
+                    query = "SELECT l1_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l1_num = new OleDbCommand(query, con);
+                    reader = command_l1_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l2_num
+                    query = "SELECT l2_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l2_num = new OleDbCommand(query, con);
+                    reader = command_l2_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l3_num
+                    query = "SELECT l3_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l3_num = new OleDbCommand(query, con);
+                    reader = command_l3_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l4_num
+                    query = "SELECT l4_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l4_num = new OleDbCommand(query, con);
+                    reader = command_l4_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l5_num
+                    query = "SELECT l5_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l5_num = new OleDbCommand(query, con);
+                    reader = command_l5_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+                }
+                else
+                {
+                    //Получение l1_num
+                    classRooms.Clear();
+                    query = "SELECT l1_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l1_num = new OleDbCommand(query, con);
+                    reader = command_l1_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l2_num
+                    query = "SELECT l2_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l2_num = new OleDbCommand(query, con);
+                    reader = command_l2_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l3_num
+                    query = "SELECT l3_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='1'";
+                    OleDbCommand command_l3_num = new OleDbCommand(query, con);
+                    reader = command_l3_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l4_num
+                    query = "SELECT l4_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='1'";
+                    OleDbCommand command_l4_num = new OleDbCommand(query, con);
+                    reader = command_l4_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+
+                    //Получение l5_num
+                    query = "SELECT l5_num FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='1'";
+                    OleDbCommand command_l5_num = new OleDbCommand(query, con);
+                    reader = command_l5_num.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        classRooms.Add(reader[0].ToString());
+                    }
+                }
+
+            }
+
+            return classRooms;
+        }
+
     }
 }
