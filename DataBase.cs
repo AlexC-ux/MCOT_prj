@@ -37,8 +37,6 @@ namespace MCOT_prj
             }
             reader.Close();
 
-
-
         }
 
     }

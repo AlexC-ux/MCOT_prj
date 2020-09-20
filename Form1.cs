@@ -12,9 +12,8 @@ namespace MCOT_prj
 {
     public partial class Form1 : Form
     {
-        ElementEditor elEditor = new ElementEditor();
         DataBase db = new DataBase();
-        Subjects sub = new Subjects();
+
         public Form1()
         {
             InitializeComponent();
