@@ -14,6 +14,8 @@ namespace MCOT_prj
     {
         DataBase db = new DataBase();
 
+        public string choosedGroup;
+
         public Form1()
         {
             InitializeComponent();
@@ -34,12 +36,11 @@ namespace MCOT_prj
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            //elEditor.SetGroups(comboBox1, sub.Groups);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            choosedGroup = comboBox1.SelectedItem.ToString();
         }
 
         private void comboBox1_MouseEnter(object sender, EventArgs e)
