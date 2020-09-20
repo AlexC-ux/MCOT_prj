@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace MCOT_prj
 {
-    class DataBase:Form
+    class DataBase : Form
     {
         public static string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"Main.accdb\"";
 
-
+        public DateTime ChoosedDay = DateTime.Today;
 
         public OleDbConnection con = new OleDbConnection(connectionString);
         string query;
@@ -107,10 +107,9 @@ namespace MCOT_prj
             }
             else
             {
-                var first = new DateTime(2020, 9, 1);
-                DateTime today = DateTime.Today;
-                int weekNum = (today.DayOfYear - 1) / 7 + 1;
-                int even = weekNum % 2;
+
+                int even = CalculateTheWeek(ChoosedDay);
+
 
                 if ( even==0 )
                 {
@@ -212,6 +211,188 @@ namespace MCOT_prj
             }
 
             return subjects;
+        }
+
+        public int CalculateTheWeek(DateTime selected)
+        {
+            int day = selected.DayOfYear;
+            var first = new DateTime(2020, 9, 1);
+            int weekNum = (day - 1) / 7 + 1;
+            int even = weekNum % 2;
+            return even;
+        }
+
+        public List<string> GetTeacher(string day)
+        {
+
+            List<string> teachers = new List<string>();
+            query = "SELECT 'even' FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+            OleDbCommand command = new OleDbCommand(query, con);
+            OleDbDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                teachers.Add(reader.GetString(0));
+            }
+            reader.Close();
+            if (teachers.Count < 2)
+            {
+
+                //Получение t1_teacher
+                teachers.Clear();
+                query = "SELECT l1_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l1_teacher = new OleDbCommand(query, con);
+                reader = command_l1_teacher.ExecuteReader();
+                while (reader.Read())
+                {
+                    teachers.Add(reader[0].ToString());
+                }
+
+                //Получение l2_teacher
+                query = "SELECT l2_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l2_teacher = new OleDbCommand(query, con);
+                reader = command_l2_teacher.ExecuteReader();
+                while (reader.Read())
+                {
+                    teachers.Add(reader[0].ToString());
+                }
+
+                //Получение l3_teacher
+                query = "SELECT l3_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l3_teacher = new OleDbCommand(query, con);
+                reader = command_l3_teacher.ExecuteReader();
+                while (reader.Read())
+                {
+                    teachers.Add(reader[0].ToString());
+                }
+
+                //Получение l4_teacher
+                query = "SELECT l4_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l4_teacher = new OleDbCommand(query, con);
+                reader = command_l4_teacher.ExecuteReader();
+                while (reader.Read())
+                {
+                    teachers.Add(reader[0].ToString());
+                }
+
+                //Получение l5_teacher
+                query = "SELECT l5_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "'";
+                OleDbCommand command_l5_teacher = new OleDbCommand(query, con);
+                reader = command_l5_teacher.ExecuteReader();
+                while (reader.Read())
+                {
+                    teachers.Add(reader[0].ToString());
+                }
+
+
+
+                reader.Close();
+            }
+            else
+            {
+
+                int even = CalculateTheWeek(ChoosedDay);
+
+
+                if (even == 0)
+                {
+                    //Получение l1_teacher
+                    teachers.Clear();
+                    query = "SELECT l1_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l1_teacher = new OleDbCommand(query, con);
+                    reader = command_l1_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l2_teacher
+                    query = "SELECT l2_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l2_teacher = new OleDbCommand(query, con);
+                    reader = command_l2_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l3_teacher
+                    query = "SELECT l3_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l3_teacher = new OleDbCommand(query, con);
+                    reader = command_l3_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l4_teacher
+                    query = "SELECT l4_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l4_teacher = new OleDbCommand(query, con);
+                    reader = command_l4_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l5_teacher
+                    query = "SELECT l5_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l5_teacher = new OleDbCommand(query, con);
+                    reader = command_l5_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+                }
+                else
+                {
+                    //Получение l1_teacher
+                    teachers.Clear();
+                    query = "SELECT l1_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l1_teacher = new OleDbCommand(query, con);
+                    reader = command_l1_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l2_teacher
+                    query = "SELECT l2_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='2'";
+                    OleDbCommand command_l2_teacher = new OleDbCommand(query, con);
+                    reader = command_l2_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l3_teacher
+                    query = "SELECT l3_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='1'";
+                    OleDbCommand command_l3_teacher = new OleDbCommand(query, con);
+                    reader = command_l3_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l4_teacher
+                    query = "SELECT l4_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='1'";
+                    OleDbCommand command_l4_teacher = new OleDbCommand(query, con);
+                    reader = command_l4_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+
+                    //Получение l5_teacher
+                    query = "SELECT l5_teacher FROM MainTable WHERE MainTable.group='" + activeGroup + "' AND MainTable.dayoftheweek ='" + day + "' AND MainTable.even='1'";
+                    OleDbCommand command_l5_teacher = new OleDbCommand(query, con);
+                    reader = command_l5_teacher.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        teachers.Add(reader[0].ToString());
+                    }
+                }
+
+            }
+
+            return teachers;
         }
 
     }

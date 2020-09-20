@@ -14,6 +14,7 @@ namespace MCOT_prj
     {
         DataBase db = new DataBase();
         List<string> subjects_mon = new List<string>();
+        List<string> teachers_mon = new List<string>();
         public string choosedGroup;
 
         public Form1()
@@ -44,8 +45,10 @@ namespace MCOT_prj
         {
             choosedGroup = comboBox1.SelectedItem.ToString();
             db.activeGroup = choosedGroup;
-            SetMondaySubjects();
+            SetObjects();
+            
             SetLabels();
+
 
         }
 
@@ -62,12 +65,16 @@ namespace MCOT_prj
             }
         }
 
-        private void SetMondaySubjects()
+        private void SetObjects()
         {
 
             foreach (string s in db.GetSubj("Понедельник"))
             {
                 subjects_mon.Add(s);
+            }
+            foreach (string s in db.GetTeacher("Понедельник"))
+            {
+                teachers_mon.Add(s);
             }
             
         }
@@ -80,9 +87,18 @@ namespace MCOT_prj
             label3.Text = subjects_mon[2];
             label4.Text = subjects_mon[3];
             label5.Text = subjects_mon[4];
+
+            label6.Text = teachers_mon[0];
+            label7.Text = teachers_mon[1];
+            label8.Text = teachers_mon[2];
+            label9.Text = teachers_mon[3];
+            label10.Text = teachers_mon[4];
             //-----------------------//
 
         }
+
+
+
 
     }
 }
