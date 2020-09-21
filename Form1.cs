@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -79,18 +80,28 @@ namespace MCOT_prj
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            choosedGroup = comboBox1.SelectedItem.ToString();
-            db.activeGroup = choosedGroup;
-            SetObjects();
 
-            groupBox1.Show();
-            groupBox4.Show();
-            groupBox7.Show();
-            groupBox10.Show();
-            groupBox13.Show();
-            groupBox16.Show();
+            try
+            {
+                choosedGroup = comboBox1.SelectedItem.ToString();
+                db.activeGroup = choosedGroup;
+                SetObjects();
 
-            SetLabels();
+                groupBox1.Show();
+                groupBox4.Show();
+                groupBox7.Show();
+                groupBox10.Show();
+                groupBox13.Show();
+                groupBox16.Show();
+
+                SetLabels();
+            }
+            catch (NullReferenceException)
+            {
+                
+            }
+
+            
 
 
         }
