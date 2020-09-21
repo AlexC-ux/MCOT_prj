@@ -110,6 +110,30 @@ namespace MCOT_prj
 
         private void SetObjects()
         {
+            teachers_mon.Clear();
+            teachers_tue.Clear();
+            teachers_wed.Clear();
+            teachers_sun.Clear();
+            teachers_thu.Clear();
+            teachers_fri.Clear();
+
+            subjects_mon.Clear();
+            subjects_tue.Clear();
+            subjects_wed.Clear();
+            subjects_sun.Clear();
+            subjects_thu.Clear();
+            subjects_fri.Clear();
+
+            num_mon.Clear();
+            num_tue.Clear();
+            num_wed.Clear();
+            num_sun.Clear();
+            num_thu.Clear();
+            num_fri.Clear();
+
+
+
+
             //Заполнение списков на пн
             foreach (string s in db.GetSubj("Понедельник"))
             {
