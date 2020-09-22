@@ -11,8 +11,13 @@ using System.Windows.Forms;
 
 namespace MCOT_prj
 {
+
     public partial class Form1 : Form
     {
+        public string dir = Application.StartupPath;
+
+        DBUpdater dbUpdater = new DBUpdater();
+
         DataBase db = new DataBase();
 
         List<string> subjects_mon = new List<string>();//списки пн
@@ -53,6 +58,9 @@ namespace MCOT_prj
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            dbUpdater.UpdateDB(Application.StartupPath);
+
+
             db.con.Open();
             db.findGroups();
             SetGroups();
@@ -80,6 +88,7 @@ namespace MCOT_prj
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
 
             try
             {
